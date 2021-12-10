@@ -1,5 +1,11 @@
 import { logInfo, httpPost } from "@suborbital/suborbital";
-import type { AvenueInput } from "./custom";
+import { JSON } from "json-as";
+
+@json
+export class AvenueInput {
+  title: string;
+  messageBody: string;
+}
 
 @json
 class WebhookPayload {
@@ -9,7 +15,7 @@ class WebhookPayload {
 
 const URL = "http://httpbin.org/post";
 
-export function run(input: AvenueInput): void {
+export function run(input: AvenueInput): ArrayBuffer {
   const payload: WebhookPayload = {
     title: input.title,
     payloadMessage: input.messageBody,
@@ -18,5 +24,5 @@ export function run(input: AvenueInput): void {
   const strPayload = JSON.stringify(payload);
   const arrPayload = String.UTF8.encode(strPayload);
 
-  httpPost(URL, arrPayload, null);
+  return httpPost(URL, arrPayload, null);
 }
