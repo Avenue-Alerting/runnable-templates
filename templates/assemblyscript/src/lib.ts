@@ -1,11 +1,22 @@
-import { logInfo } from "@suborbital/suborbital"
+import { logInfo, httpPost } from "@suborbital/suborbital";
+import type { AvenueInput } from "./custom";
 
-export function run(input: ArrayBuffer): ArrayBuffer {
-	let inStr = String.UTF8.decode(input)
-  
-	let out = "hey there, " + inStr
+@json
+class WebhookPayload {
+  title: string;
+  payloadMessage: string;
+}
 
-	logInfo(out)
+const URL = "http://httpbin.org/post";
 
-	return String.UTF8.encode(out)
+export function run(input: AvenueInput): void {
+  const payload: WebhookPayload = {
+    title: input.title,
+    payloadMessage: input.messageBody,
+  };
+
+  const strPayload = JSON.stringify(payload);
+  const arrPayload = String.UTF8.encode(strPayload);
+
+  httpPost(URL, arrPayload, null);
 }
