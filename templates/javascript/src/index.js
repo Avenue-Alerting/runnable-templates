@@ -13,7 +13,7 @@ export function run_e(payload, ident) {
   const parsedInput = JSON.parse(input);
 
   // TODO: Fail if parsedInput is not a list
-  const result = parsedInput.map((row) => processRow(row));
+  const result = parsedInput.map((row) => processRow(row)).filter((row) => row !== null && row !== undefined);
 
   // Return stringified results
   const stringifiedResult = JSON.stringify(result);
