@@ -1,5 +1,5 @@
 import "fastestsmallesttextencoderdecoder-encodeinto/EncoderDecoderTogether.min.js";
-import { run } from "./lib";
+import { processRow } from "./lib";
 
 import { setup, runnable } from "@suborbital/runnable";
 
@@ -10,7 +10,12 @@ export function run_e(payload, ident) {
   setup(this.imports, ident);
 
   const input = decoder.decode(payload);
-  const result = run(input);
+  const parsedInput = JSON.parse(input);
 
-  runnable.returnResult(result);
+  // TODO: Fail if parsedInput is not a list
+  const result = parsedInput.map((row) => processRow(row));
+
+  // Return stringified results
+  const stringifiedResult = JSON.stringify(result);
+  runnable.returnResult(stringifiedResult);
 }

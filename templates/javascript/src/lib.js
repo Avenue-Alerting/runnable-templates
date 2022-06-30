@@ -1,9 +1,7 @@
-import { log } from "@suborbital/runnable";
+export const processRow = (row) => {
+  // Transform the row (a single row from your query)
+  const processedRow = row;
 
-export const run = (input) => {
-  let message = "Hello, " + input;
-
-  log.info(message);
-
-  return message;
+  // Return the processed row
+  return processedRow;
 };
