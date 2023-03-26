@@ -1,5 +1,5 @@
 import "fastestsmallesttextencoderdecoder-encodeinto/EncoderDecoderTogether.min.js";
-import { processRow } from "./lib";
+import { processRows } from "./lib";
 
 import { setup, runnable } from "@suborbital/runnable";
 
@@ -13,7 +13,7 @@ export function run_e(payload, ident) {
   const parsedInput = JSON.parse(input);
 
   // TODO: Fail if parsedInput is not a list
-  const result = parsedInput.map((row) => processRow(row)).filter((row) => row !== null && row !== undefined);
+  const result = processRows(parsedInput); // List of rows
 
   // Return stringified results
   const stringifiedResult = JSON.stringify(result);
