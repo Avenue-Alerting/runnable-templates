@@ -1,6 +1,4 @@
-/**
- * This is the main function that will be called by the template.
- */
+// This is the main function that will be called by the template.
 export const processRows = (rows) => {
   return rows // This is the list of rows from your query
     .map((row) => processRow(row))
